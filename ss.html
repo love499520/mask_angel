@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>简听 - 懒人听网页听小说的神器</title>
+</head>
+
+<body>
+    <!--
+ 
+    -->
+    <script src="https://s23.cnzz.com/z_stat.php?id=1275487845&web_id=1275487845" language="JavaScript"></script>
+    <script type="text/javascript">
+        //声明_czc对象:
+        var _czc = _czc || [];
+        //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+        _czc.push(["_setAccount", "1275487845"]);
+        // 获取终端的相关信息
+        var Terminal = {
+            // 辨别移动终端类型
+            platform: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    // android终端或者uc浏览器
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+                    // 是否为iPhone或者QQHD浏览器
+                    iPhone: u.indexOf('iPhone') > -1,
+                    // 是否iPad
+                    iPad: u.indexOf('iPad') > -1
+                };
+            }(),
+            // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        // 根据不同的终端，跳转到不同的地址
+        var theUrl = 'https://http://mrw.so/6xPZsF';
+        if (Terminal.platform.android) {//安卓端
+            _czc.push(['_trackEvent', '简听', '下载', 'Android']);
+            document.write('http://mrw.so/5Wfmps');
+            //theUrl = 'https://http://mrw.so/6xPZsF';
+            //location.href = theUrl;
+        } else {
+            if (Terminal.platform.iPhone) {//iPhone端
+                _czc.push(['_trackEvent', '简听', '下载', 'iPhone']);
+                theUrl = 'https://http://mrw.so/6xPZsF';
+            } else if (Terminal.platform.iPad) {//iPad端
+                _czc.push(['_trackEvent', '简听', '下载', 'iPad']);
+                // 还可以通过language，区分开多国语言版
+                switch (Terminal.language) {
+                    case 'en-us'://iPad英文版APP Store地址
+                        theUrl = 'https://http://mrw.so/6xPZsF';
+                        break;
+                    case 'ko-kr'://iPad韩语版APP Store地址
+                        theUrl = 'https://http://mrw.so/6xPZsF';
+                        break;
+                    case 'ja-jp'://iPad日文版APP Store地址
+                        theUrl = 'https://http://mrw.so/6xPZsF';
+                        break;
+                    default://iPad默认APP Store地址
+                        theUrl = 'https://http://mrw.so/6xPZsF';
+                }
+            } else {
+                _czc.push(['_trackEvent', '简听', '下载', 'Other']);
+            }
+
+            location.href = theUrl;
+        }
+
+    </script>
+</body>
+
+</html>
