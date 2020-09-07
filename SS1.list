@@ -1,0 +1,5 @@
+Proxy:
+- name: "网易云解锁"
+  type: http
+  server: 103.56.61.123
+  port: 51611
