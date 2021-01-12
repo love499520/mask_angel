@@ -5,7 +5,6 @@
 DOMAIN-SUFFIX,acl4ssr
 
 # Emby
+DOMAIN-SUFFIX,hk.angele.ml
 DOMAIN-SUFFIX,club.angele.ml
 DOMAIN-SUFFIX,cf1.jmsooo.com
-IP-CIDR,ip,103.135.248.145
-IP-CIDR,ip,172.67.136.175
