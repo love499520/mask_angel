@@ -4,7 +4,8 @@
 # ACL4SSR标志 如没有，代表不是用ACL4SSR规则
 DOMAIN-SUFFIX,acl4ssr
 
-# EMBY
+# Emby
+DOMAIN-SUFFIX,hk.angele.ml
 DOMAIN-SUFFIX,club.angele.ml
 DOMAIN-SUFFIX,cf1.jmsooo.com
 IP-CIDR,ip,103.135.248.145
