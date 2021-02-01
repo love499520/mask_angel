@@ -1,5 +1,6 @@
 # Emby
 DOMAIN-SUFFIX,hk.angele.ml
+DOMAIN-SUFFIX,emby.angele.ml
 DOMAIN-SUFFIX,club.angele.ml
 DOMAIN-SUFFIX,cf1.jmsooo.com
 IP-CIDR,103.135.248.145/32
