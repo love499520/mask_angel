@@ -1,4 +1,7 @@
 # Emby
+USER-AGENT,Infuse*
+USER-AGENT,Emby*
+DOMAIN-KEYWORD,emby
 DOMAIN-SUFFIX,hk.angele.ml
 DOMAIN-SUFFIX,emby.angele.ml
 DOMAIN-SUFFIX,cf1.jmsooo.com
