@@ -3,4 +3,4 @@
 
 [General]
 dns-server = 8.8.8.8, 8.8.4.4
-https://dns.google/dns-query
+doh-server = https://dns.google/dns-query
