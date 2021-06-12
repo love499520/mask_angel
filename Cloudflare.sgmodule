@@ -1,4 +1,4 @@
-#!name=Cloudflare  DoH
+#!name=Cloudflare DoH
 #!desc=Enable DNS over HTTPS (DoH) with Cloudflare  Public DNS.
 
 [General]
