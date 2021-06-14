@@ -799,7 +799,7 @@ TF下载修正 = type=http-request,pattern=^https?:\/\/testflight\.apple\.com\/v
 sub_info = type=http-request,pattern=http://sub\.info,script-path=https://raw.githubusercontent.com/TributePaulWalker/Profiles/main/JavaScript/Sub_info_lite.js
 彩云天气 = type=http-request,pattern=https:\/\/((weather-data\.apple)|(api.weather))\.com,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/caiyun.js,script-update-interval=0
 彩云天气 = type=cron,cronexp=0 30 7,21 * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/caiyun.js,script-update-interval=0
-Dler Cloud = type=cron,cronexp=0 0 0/1 * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/glados/checkin_env.js,script-update-interval=0
+Dler Cloud = type=cron,cronexp=0 0 * * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/glados/checkin_env.js,script-update-interval=0
 Dler Cloud = type=cron,cronexp=0 31 7,21 * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/flow.js,script-update-interval=0
 疫情日报 = type=cron,cronexp=0 32 7,21 * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/nCov.js,script-update-interval=0
 今日汇率 = type=cron,cronexp=0 33 7,21 * * ?,wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0
