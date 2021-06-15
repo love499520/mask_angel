@@ -3,6 +3,7 @@
 #!system=ios
 
 [General]
+# 隐藏VPN
 hide-vpn-icon=true
 
 [Script]
