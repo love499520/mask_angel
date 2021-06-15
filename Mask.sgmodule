@@ -16,6 +16,7 @@ Dler Cloud Cookie = type=http-request,pattern=https:\/\/dlercloud\.com,script-pa
 Dler Cloud Cookie版 = type=cron,cronexp=0 1 * * * ?,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/glados/checkincookie_env.js,script-update-interval=0
 疫情日报 = type=cron,cronexp="0 32 7,21 * * ?",wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/nCov.js,script-update-interval=0
 今日汇率 = type=cron,cronexp="0 33 7,21 * * ?",wake-system=1,script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/exchange.js,script-update-interval=0
+Emby 解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://subweb.oss-cn-hongkong.aliyuncs.com/Script/embyPremiere.js,script-update-interval=0
 
 [MITM]
-hostname = dlercloud.com, weather-data.apple.com, api.weather.com, *.music.163.com, music.163.com
+hostname = %APPEND% mb3admin.com, dlercloud.com, weather-data.apple.com, api.weather.com, *.music.163.com, music.163.com
