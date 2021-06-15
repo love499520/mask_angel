@@ -3,7 +3,9 @@
 #!system=ios
 
 [General]
-# 隐藏VPN
+# 开启 IPV6
+ipv6 = true
+# 隐藏 VPN
 hide-vpn-icon=true
 
 [Script]
