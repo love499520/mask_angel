@@ -5,8 +5,8 @@
 [General]
 # 开启 IPV6
 ipv6 = true
-# 隐藏 VPN
-hide-vpn-icon = true
+# 隐藏状态栏上的 VPN 图标，可能会导致「Cannot allocate memory」系统错误，请谨慎使用
+# hide-vpn-icon = true
 
 [URL Rewrite]
 # 关闭谷歌安全搜索
