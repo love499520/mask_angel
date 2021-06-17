@@ -1,0 +1,6 @@
+#!name=DoH
+#!desc=Enable DNS over HTTPS (DoH) with DoH Public DNS.
+
+[General]
+dns-server = 8.8.8.8, 8.8.4.4, 119.29.29.29, 182.254.118.118
+doh-server = https://dns.google/dns-query, https://doh.pub/dns-query

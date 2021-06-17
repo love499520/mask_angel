@@ -1,6 +1,0 @@
-#!name=Google DoH
-#!desc=Enable DNS over HTTPS (DoH) with Google Public DNS.
-
-[General]
-dns-server = 8.8.8.8, 8.8.4.4
-doh-server = https://dns.google/dns-query
