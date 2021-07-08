@@ -6,7 +6,8 @@
 # 开启 IPV6
 ipv6 = true
 # 隐藏状态栏上的 VPN 图标，可能会导致「Cannot allocate memory」系统错误，请谨慎使用
-# hide-vpn-icon = true
+hide-vpn-icon = true
+tun-excluded-routes = 0.0.0.1/31
 # DoH
 dns-server = 8.8.8.8, 8.8.4.4, 119.29.29.29, 182.254.118.118
 doh-server = https://dns.google/dns-query, https://doh.pub/dns-query
