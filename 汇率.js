@@ -21,7 +21,8 @@ const currencyNames = {
 };
 
 
-$.http.get({url: "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cny.json"})
+$.http.get({url: "https : 
+//cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/cny.json"})
     .then((response) => {
         const data = JSON.parse(response.body);
         const source = currencyNames[base];
