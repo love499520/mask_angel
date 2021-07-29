@@ -33,8 +33,10 @@ TF下载修正 = type=http-request,pattern=^https?:\/\/testflight\.apple\.com\/v
 Emby 解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/love499520/mask_angel/master/Emby.js
 # 微信内链跳转
 微信跳转 = type=http-response,pattern=^https?:\/\/weixin110\.qq\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/HotKids/Rules/master/Script/weixin110.js
+# 微信朋友圈去广告
+http-response ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Wechat.js
 # 彩票查询
 彩票查询 = type=cron,cronexp="0 34 7,21 * * ?",script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/ssq/ssq.js
 
 [MITM]
-hostname = %INSERT% www.google.com,www.google.com.*, %APPEND% mp.weixin.qq.com, weixin110.qq.com, %APPEND% testflight.apple.com, %APPEND% mb3admin.com, dlercloud.com, weather-data.apple.com, api.weather.com, *.music.163.com, music.163.com
+hostname = %INSERT% www.google.com, www.google.com.*, %APPEND% mp.weixin.qq.com, weixin110.qq.com, %APPEND% testflight.apple.com, %APPEND% mb3admin.com, dlercloud.com, weather-data.apple.com, api.weather.com, *.music.163.com, music.163.com
