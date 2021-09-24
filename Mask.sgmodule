@@ -10,8 +10,8 @@ ipv6-vif = true
 hide-vpn-icon = true
 tun-excluded-routes = 0.0.0.1/31
 # DoH
-dns-server = 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4, 119.29.29.29, 182.254.118.118
-doh-server = https://1.1.1.1/dns-query, https://1.0.0.1/dns-query, https://dns.adguard.com/dns-query, https://dns.google/dns-query, https://doh.pub/dns-query
+dns-server = 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4, 119.29.29.29, 182.254.118.118, 223.5.5.5, 223.6.6.6
+doh-server = https://1.1.1.1/dns-query, https://1.0.0.1/dns-query, https://dns.adguard.com/dns-query, https://dns.google/dns-query, https://doh.pub/dns-query, https://dns.alidns.com/dns-query
 
 [URL Rewrite]
 # 关闭谷歌安全搜索
