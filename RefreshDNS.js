@@ -1,8 +1,8 @@
 /*
 [Script]
-Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js
+// Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/love499520/mask_angel/master/RefreshDNS.js
 // use "icon" and "color" in "argument":
-// Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js,argument=icon=arrow.clockwise&color=#3d3d5b
+Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/love499520/mask_angel/master/RefreshDNS.js,argument=icon=arrow.clockwise&color=#3d3d5b
 
 [Panel]
 Refresh DNS = script-name=Refresh DNS,update-interval=-1
