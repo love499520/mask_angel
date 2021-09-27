@@ -1,11 +1,11 @@
 /*
 [Script]
-flushDNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js
+Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js
 // use "icon" and "color" in "argument":
-// flushDNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js,argument=icon=arrow.clockwise&color=#3d3d5b
+// Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/flushDNS.js,argument=icon=arrow.clockwise&color=#3d3d5b
 
 [Panel]
-flushDNS = script-name=flushDNS,update-interval=-1
+Refresh DNS = script-name=Refresh DNS,update-interval=-1
 */
 
 !(async () => {
@@ -14,7 +14,7 @@ flushDNS = script-name=flushDNS,update-interval=-1
     await httpAPI("/v1/dns/flush");
     let delay = ((await httpAPI("/v1/test/dns_delay")).delay * 1000).toFixed(0);
     let panel = {
-        title: "Flush DNS",
+        title: "Refresh DNS",
         content: `delay: ${delay}ms${dnsCache ? `\nserver:\n${dnsCache}` : ""}`,
     };
     if (typeof $argument != "undefined") {
