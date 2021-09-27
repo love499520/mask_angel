@@ -53,8 +53,8 @@ Sub_info = script-name=Sub_info,update-interval=600
   $done({
     title: `${params.title} | ${hour}:${minutes}`,
     content: body,
-    icon: params.icon || "airplane.circle",
-    "icon-color": params.color || "#007aff",
+    icon: params.icon || "network",
+    "icon-color": params.color || "#4169E1",
   });
 })();
 
