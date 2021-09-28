@@ -7,7 +7,7 @@ const AREA_TEST_FILM_ID = 80018499
   let result = {
     title: '🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 解锁检测',
     style: 'error',
-    content: '检测失败，请刷新',
+    content: '❌ 检测失败，请刷新',
   }
 
   await test(FILM_ID)
@@ -17,7 +17,7 @@ const AREA_TEST_FILM_ID = 80018499
       }
 
       result['style'] = 'good'
-      result['content'] = '完整解锁 Netflix，解锁区域：' + code.toUpperCase()
+      result['content'] = '完整解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎，解锁区域：' + code.toUpperCase()
       return Promise.reject('BreakSignal')
     })
     .then((code) => {
@@ -26,13 +26,13 @@ const AREA_TEST_FILM_ID = 80018499
       }
 
       result['style'] = 'info'
-      result['content'] = '仅支持解锁自制剧，解锁区域：' + code.toUpperCase()
+      result['content'] = '仅支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧，解锁区域：' + code.toUpperCase()
       return Promise.reject('BreakSignal')
     })
     .catch((error) => {
       if (error === 'Not Available') {
         result['style'] = 'alert'
-        result['content'] = '不支持解锁 Netflix'
+        result['content'] = '不支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎'
         return
       }
     })
