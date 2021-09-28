@@ -58,7 +58,7 @@ PanelA = title=已完成订阅制解锁,content=感谢您回到Surge\n尊贵的S
 net-info-panel=title="网络状态",content="请刷新",style=info,script-name=net-info-panel
 ytb_check = script-name=ytb_check, title="📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 解锁检测", update-interval=3600
 nf_check = script-name=nf_check, title="🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 解锁检测", update-interval=3600
-Refresh DNS = script-name=Refresh DNS,title="♻️ 𝑹𝒆𝒇𝒓𝒆𝒔𝒉 𝑫𝑵𝑺", update-interval=900
+Refresh DNS = script-name=Refresh DNS,title="♻️ 𝑹𝒆𝒇𝒓𝒆𝒔𝒉 𝑫𝑵𝑺", update-interval=3600
 
 [MITM]
 hostname = %INSERT% www.google.com, www.google.com.*, %APPEND% mp.weixin.qq.com, weixin110.qq.com, %APPEND% testflight.apple.com, %APPEND% mb3admin.com, *.emby.wtf:0, *.plusmedia.site:0, dlercloud.com, weather-data.apple.com, api.weather.com, *.music.163.com, music.163.com
