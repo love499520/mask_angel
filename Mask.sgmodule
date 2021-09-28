@@ -56,8 +56,8 @@ Refresh DNS = type=generic,timeout=10,script-path=https://raw.githubusercontent.
 [Panel]
 PanelA = title=已完成订阅制解锁,content=感谢您回到Surge\n尊贵的Surge Pro用户,icon =crown.fill,icon-color=#FFD700
 net-info-panel=title="网络状态",content="请刷新",style=info,script-name=net-info-panel
-ytb_check = script-name=ytb_check, title="📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 解锁检测", update-interval=900
-nf_check = script-name=nf_check, title="🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 解锁检测", update-interval=900
+ytb_check = script-name=ytb_check, title="📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 解锁检测", update-interval=3600
+nf_check = script-name=nf_check, title="🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 解锁检测", update-interval=3600
 Refresh DNS = script-name=Refresh DNS,title="♻️ 𝑹𝒆𝒇𝒓𝒆𝒔𝒉 𝑫𝑵𝑺", update-interval=900
 
 [MITM]
