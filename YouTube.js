@@ -4,19 +4,19 @@ const BASE_URL = 'https://www.youtube.com/premium'
   let result = {
     title: '📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 解锁检测',
     style: 'error',
-    content: '检测失败，请刷新',
+    content: '❌ 检测失败，请刷新',
   }
 
   await test()
     .then((code) => {
       if (code === 'Not Available') {
         result['style'] = 'alert'
-        result['content'] = '不支持解锁 YouTube Premium'
+        result['content'] = '不支持解锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎'
         return
       }
 
       result['style'] = 'good'
-      result['content'] = '支持解锁 YouTube Premium，解锁区域：' + code
+      result['content'] = '支持解锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎，解锁区域：' + code
     })
     .finally(() => {
       $done(result)
