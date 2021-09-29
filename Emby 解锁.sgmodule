@@ -5,4 +5,4 @@
 Emby 解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/love499520/mask_angel/master/Emby.js
 
 [MITM]
-hostname = %APPEND% mb3admin.com
+hostname = %APPEND% mb3admin.com, www.mb3admin.com
