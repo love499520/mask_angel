@@ -14,7 +14,7 @@
              title: "未连接网络",
              content: "请检查网络连接",
              icon: "wifi.exclamationmark",
-             'icon-color': "#FF0000"
+             'icon-color': "#FFD700"
          });
          return;
     }
