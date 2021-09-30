@@ -1,24 +1,26 @@
 /**
- * 原始项目 https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/Network-Info.sgmodule
- * https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/networkCheck.js
+ * 原始项目 https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/Network-Info_test.sgmodule
+ * https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/networkCheck_test.js
  */
- const $ = API("NetInfoPanel", true);
- const $http = HTTP();
- 
  const { wifi, v4 } = $network;
  const v4IP = v4.primaryAddress;
  let url = "http://ip-api.com/json"
 
- !(async () => {
-     // No network connection
-     if (!v4IP) {
-         $.done({
-             title: "未连接网络",
-             content: "请检查网络连接",
-             icon: "wifi.exclamationmark",
-             'icon-color': "#FFD700"
-         });
-         return;
+ ;(async () => {
+    let result ={
+        title: "Network Info Panel",
+        content: "尚未連接網際網路\n請檢查網際網路狀態後再度測試",
+        icon: "wifi.exclamationmark",
+        'icon-color': "#FFD700"
+    }
+    // No network connection
+    if (!v4IP) {
+        result['title'] = "Network Info Panel"
+        result['content'] = "尚未連接網際網路\n請檢查網際網路狀態後再度測試"
+        result['icon'] = "wifi.exclamationmark"
+        result['icon-color'] = "#FFD700"
+        $done(result)
+        return
     }
     const ip = v4IP;
     const router = wifi.ssid ? v4.primaryRouter : undefined;
@@ -30,19 +32,18 @@
         let emoji = getFlagEmoji(jsonData.countryCode)
         let city = jsonData.city
         let isp = jsonData.isp
-        const body = {
-        title: wifi.ssid || "蜂窝数据",
-        content: `內部 IP：${ip} \n`
-                + (wifi.ssid ? `路由器地址：${router}\n` : "")
-                + (wifi.ssid ? `外部 IP：${externalIP}\n` : `外部 IP：${externalIP}\n`)
-                + (wifi.ssid ? `节点 ISP : ${isp}\n` : `节点 ISP : ${isp}\n`)
-                + (wifi.ssid ? `节点位置 : ${emoji} ${country} | ${city}` : `节点位置 : ${emoji} ${country} | ${city}`),
-        icon: wifi.ssid ? "wifi" : "simcard",
-        'icon-color': wifi.ssid ? "#4169E1" : "#4169E1"
-        };
-        $.done(body);
-    });
- })();
+        result['title'] =  wifi.ssid ? wifi.ssid : "蜂窝网络"
+        result['content'] = (wifi.ssid ? `內部 IP：${ip} \n` : `內部 IP：${ip} \n`)
+                            + (wifi.ssid ? `路由器地址：${router}\n` : "")
+                            + (wifi.ssid ? `外部 IP：${externalIP}\n` : `外部 IP：${externalIP}\n`)
+                            + (wifi.ssid ? `节点 ISP : ${isp}\n` : `节点 ISP : ${isp}\n`)
+                            + (wifi.ssid ? `节点位置 : ${emoji} ${country} | ${city}` : `节点位置 : ${emoji} ${country} | ${city}`)
+        result['icon'] = wifi.ssid ? "wifi" : "simcard"
+        result['icon-color'] = wifi.ssid ? "#4169E1" : "#4169E1"
+        $done(result)
+        return
+    })
+ })()
  
  function getFlagEmoji(countryCode) {
     const codePoints = countryCode
