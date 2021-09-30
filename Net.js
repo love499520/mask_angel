@@ -1,8 +1,4 @@
 /**
- * Surge 網路詳情面板
- * 原始作者 @author: Peng-YM
- * 本人僅翻譯為繁體中文自用
- * 並與另一位 @聰聰 大的節點資訊面板進行整合
  */
  const $ = API("NetInfoPanel", true);
  const $http = HTTP();
