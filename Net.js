@@ -1,5 +1,6 @@
 /**
  * 原始项目 https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/Network-Info.sgmodule
+ * https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/networkCheck.js
  */
  const $ = API("NetInfoPanel", true);
  const $http = HTTP();
