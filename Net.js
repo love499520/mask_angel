@@ -14,7 +14,7 @@
              title: "未连接网络",
              content: "请检查网络连接",
              icon: "wifi.exclamationmark",
-             'icon-color': "#CB1B45"
+             'icon-color': "#FF0000"
          });
          return;
     }
@@ -36,7 +36,7 @@
                 + (wifi.ssid ? `节点 ISP : ${isp}\n` : `节点 ISP : ${isp}\n`)
                 + (wifi.ssid ? `节点位置 : ${emoji} ${country} | ${city}` : `节点位置 : ${emoji} ${country} | ${city}`),
         icon: wifi.ssid ? "wifi" : "simcard",
-        'icon-color': wifi.ssid ? "#005CAF" : "#F9BF45"
+        'icon-color': wifi.ssid ? "#4169E1" : "#4169E1"
         };
         $.done(body);
     });
