@@ -54,7 +54,7 @@ Sub_info = script-name=Sub_info,update-interval=600
     title: `${params.title} | ${hour}:${minutes}`,
     content: body,
     icon: params.icon || "globe.asia.australia",
-    "icon-color": params.color || "#4169E1",
+    "icon-color": params.color || "#85C1E9",
   });
 })();
 
