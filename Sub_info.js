@@ -50,24 +50,11 @@ Sub_info = script-name=Sub_info,update-interval=600
   minutes = minutes > 9 ? minutes : "0" + minutes;
 
   let body = infoList.join("\n");
-    if(parseFloat(流量)<parseFloat(100)){
-            Color = #00FF00;
-        }else if(parseFloat(流量)<parseFloat(200)){
-            Color = #00FFFF;
-        }else if(parseFloat(流量)<parseFloat(300)){
-            Color = #0000FF;
-        }else if(parseFloat(流量)<parseFloat(400)){
-            Color = #FFFF00;
-        }else if(parseFloat(流量)<parseFloat(500)){
-            Color = #FF0000;
-        }else{
-            Color = #C0C0C0;
-        };
   $done({
     title: `${params.title} | ${hour}:${minutes}`,
     content: body,
-    icon: params.icon || "network",
-    "icon-color": `${Color}`,
+    icon: params.icon || "globe.asia.australia",
+    "icon-color": params.color || "#4169E1",
   });
 })();
 
