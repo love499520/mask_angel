@@ -69,7 +69,7 @@ $configuration.sendMessage(message).then(resolve => {
       result['content'] = '仅支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧'
       //return
     } else if (code === "timeout") {
-      result['content'] = "❌ 测试超时，请重试"
+      result['content'] = "测试超时"
     } else {
       result['content'] = '完整解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 ➟ ⟦'+flags.get(code.toUpperCase())+" 地区⟧"
     }
