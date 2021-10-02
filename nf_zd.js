@@ -1,11 +1,11 @@
 const FILM_ID = 81215567
 const AREA_TEST_FILM_ID = 80018499
 const DEFAULT_OPTIONS = {
-  policyGroup: 'Netflix',
+  policyGroup: '💿 奈飞视频',
 }
 
 let panel = {
-  title: 'Netflix 策略选择',
+  title: '🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自动切换',
 }
 let options = getOptions()
 
