@@ -36,6 +36,7 @@ Sub_info = script-name=Sub_info,update-interval=600
   let expire = usage.expire || params.expire;
   let infoList = [`使用：${bytesToSize(used)} | ${bytesToSize(total)}`];
 
+  let per = Math.round(used/total * 10000) / 100 + "%";
   if (resetLeft) {
     infoList.push(`重置：剩余${resetLeft}天`);
   }
