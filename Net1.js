@@ -66,7 +66,7 @@ $httpClient.get("http://ipwhois.app/json/", function(error, response, data){
         }else if(中国铁通.includes(carrier)){
             运营商 = "China Tietong";
         }else{
-            运营商 = "网络信息";
+            运营商 = "𝓜𝓸𝓫𝓲𝓵𝓮 𝓝𝓮𝓽𝔀𝓸𝓻𝓴";
         }
         if(ip === query){
             $done({
