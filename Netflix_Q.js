@@ -62,16 +62,16 @@ $configuration.sendMessage(message).then(resolve => {
     console.log(code)
     
     if (code === 'Not Available') {
-      result['content'] = '不支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙'
+      result['content'] = '封锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙'
       //return 
       //console.log(result)
     } else if (code === 'Not Found') {
-      result['content'] = '仅支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧'
+      result['content'] = '仅 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制'
       //return
     } else if (code === "timeout") {
       result['content'] = "❌ 测试超时，请重试"
     } else {
-      result['content'] = '完整解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 ➟ ⟦'+flags.get(code.toUpperCase())+" 地区⟧"
+      result['content'] = '完整 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 ➟ ⟦'+flags.get(code.toUpperCase())+" 地区⟧"
     }
     
     $notify(result["title"], output, result["content"], link)
