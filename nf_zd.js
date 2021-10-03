@@ -30,6 +30,10 @@ let arr = proxy[""+netflixGroup+""];
 for (let i = 0; i < arr.length; ++i) {
 proxyName.push(arr[i].name);
 }
+let allGroup = [];
+for (var key in proxy){
+   allGroup.push(key)
+    }
 
 
 /**
@@ -100,19 +104,32 @@ console.log("仅自制:"+onlyOriginal.sort())
 
 //删除策略组外节点并更新持久化数据
 var select=[];
+//清除空值
+if(fullUnlock.toString().length==0){
+fullUnlock.splice(fullUnlock.indexOf(fullUnlock[0]), 1)
+}
+
+if(onlyOriginal.toString().length==0){
+onlyOriginal.splice(onlyOriginal.indexOf(fullUnlock[0]), 1)
+}
+
+console.log(fullUnlock.length+" | "+ onlyOriginal.length)
+
 if(fullUnlock.length>0){
 	for (let i = 0; i < fullUnlock.length; ++i) {
-	if(proxyName.includes(fullUnlock[i])==true){
-		select.push(fullUnlock[i])
+	if(proxyName.includes(fullUnlock[i])==false){
+		fullUnlock.splice(fullUnlock.indexOf(fullUnlock[i]), 1)
 		}
 	}
+	select = fullUnlock
 	$persistentStore.write(select.sort().toString(),"fullUnlockNetflix");
 }else if(fullUnlock.length==0&&onlyOriginal.length>0){
 	for (let i = 0; i < onlyOriginal.length; ++i) {
-	if(proxyName.includes(onlyOriginal[i])==true){
-		select.push(onlyOriginal[i])
+	if(proxyName.includes(onlyOriginal[i])==false){
+		onlyOriginal.splice(onlyOriginal.indexOf(onlyOriginal[i]), 1)
 		}
 	}
+	select = onlyOriginal
 	$persistentStore.write(select.sort().toString(),"onlyOriginalNetflix")
 }
 
@@ -143,12 +160,17 @@ let { status, regionCode, policyName } = await testPolicy(select[index]);
 
 console.log("节点状态:"+status)
 
+//获取根节点名
+let rootName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
+while(allGroup.includes(rootName)==true){
+	rootName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(rootName)+"")).policy;
+}
 
 /**
    * 面板显示
    */
 
-let title = "🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 ➟ " + select[index];
+let title = "🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 ➟ " + rootName;
 
 let panel = {
   title: `${title}`,
