@@ -1,7 +1,6 @@
 /*	脚本经本人测试已经可以正常运行，但仍可能存在bug，使用过程中遇到障碍请联系Telegram：https://t.me/okmytg
 脚本说明：
-	0:https://raw.githubusercontent.com/fishingworld/something/main/netflixAutoselect.sgmudole
-        1:本脚本修改自 @Helge_0x00 
+	1:本脚本修改自 @Helge_0x00 
 	2:脚本在自动更新时刷新持久化数据（可解锁节点列表），你可以在日志内查看这些数据
 	3:为了节省效能，请尽量精简策略组
 	4:点击panel时切换至下一个可解锁节点
@@ -145,16 +144,16 @@ let panel = {
 
   // 完整解锁
   if (status==2) {
-    panel['content'] = `完整解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎，区域：${regionCode}`
+    panel['content'] = `完整支援Netflix，区域：${regionCode}`
     panel['icon'] = params.icon1
 	 panel['icon-color'] = params.color1
   } else if (status==1) {
-      panel['content'] = `仅支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧`
+      panel['content'] = `解锁自制内容`
       panel['icon'] = params.icon2
 	   panel['icon-color'] = params.color2
     }else {
  		$surge.setSelectGroupPolicy("Netflix", first);
-  		panel['content'] = `不支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊～`
+  		panel['content'] = `您的节点连自制内容都不支持呢～`
   		panel['icon'] = params.icon3
 	 	panel['icon-color'] = params.color3
 		return
