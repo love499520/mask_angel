@@ -35,7 +35,7 @@ const DEFAULT_OPTIONS = {
   fullIcon: '',
   fullIconColor: '',
   fullStyle: 'good',
-  onlyOriginalContent: '仅支持解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧，地区：#REGION_FLAG# #REGION_NAME#',
+  onlyOriginalContent: '仅解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧，地区：#REGION_FLAG# #REGION_NAME#',
   onlyOriginalIcon: '',
   onlyOriginalIconColor: '',
   onlyOriginalStyle: 'info',
