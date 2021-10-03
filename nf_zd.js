@@ -17,164 +17,102 @@
 
 const FILM_ID = 81215567
 const AREA_TEST_FILM_ID = 80018499
-let params = getParams($argument)
-
-;(async () => {
-let netflixGroup = params.netflixGroup
-let proxy = await httpAPI("/v1/policy_groups");
-let groupName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
-let first = groupName;
-var proxyName= [];//netflix节点组名称
-let arr = proxy[""+netflixGroup+""];
-for (let i = 0; i < arr.length; ++i) {
-proxyName.push(arr[i].name);
+const DEFAULT_OPTIONS = {
+  policyGroup: 'Netflix',
 }
-
-
-/**
-   * 遍历测试节点组
-   */
-
-//读取持久化数据
-
-var fullUnlock=[];
-var onlyOriginal=[];
-
-fullUnlock = $persistentStore.read("fullUnlockNetflix").split(",");
-onlyOriginal= $persistentStore.read("onlyOriginalNetflix").split(",");
-
-
-//仅自动更新时遍历
-
-if($trigger == "auto-interval"){
-
-for (let i = 0; i < proxyName.length; ++i) {
-//切换节点
-$surge.setSelectGroupPolicy("Netflix", proxyName[i]);
-//等待
-await timeout(1000).catch(() => {})
-//执行测试
-
-let { status, regionCode, policyName } = await testPolicy(proxyName[i]);
-
-//填充与修正数据
-if(status===2){
-	if(fullUnlock.includes(proxyName[i])==false){
-	fullUnlock.push(proxyName[i])
-	onlyOriginal.splice(onlyOriginal.indexOf(proxyName[i]), 1)
-		}
-	}else if(status===1){
-		if(onlyOriginal.includes(proxyName[i])==false){
-		onlyOriginal.push(proxyName[i])
-		fullUnlock.splice(fullUnlock.indexOf(proxyName[i]), 1)
-		}
-	}else{
-		onlyOriginal.splice(onlyOriginal.indexOf(proxyName[i]), 1)
-		fullUnlock.splice(fullUnlock.indexOf(proxyName[i]), 1)
-		}
-  }
-}
-
-//打印测试结果
-
-console.log("全解锁："+fullUnlock. sort())
-console.log("自制："+onlyOriginal. sort())
-
-// 创建持久化数据
-$persistentStore.write(fullUnlock.toString(),"fullUnlockNetflix");
-$persistentStore.write(onlyOriginal.toString(),"onlyOriginalNetflix")
-
-
-/**
-   * 切换节点
-   */
-
-//删除策略组外节点并更新持久化数据
-var select=[];
-if(fullUnlock.length>0){
-	for (let i = 0; i < fullUnlock.length; ++i) {
-	
-	if(proxyName.includes(fullUnlock[i])==true){
-		select.push(fullUnlock[i])
-		}
-	}
-	$persistentStore.write(select.sort().toString(),"fullUnlockNetflix");
-}else if(fullUnlock.length==0&&onlyOriginal.length>0){
-	for (let i = 0; i < onlyOriginal.length; ++i) {
-
-	if(proxyName.includes(onlyOriginal[i])==true){
-		select.push(fullUnlock[i])
-		}
-	}
-	$persistentStore.write(select.sort().toString(),"onlyOriginalNetflix")
-}
-
-
-
-//当前节点
-groupName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
-
-
-//轮循切换
-let index = select.indexOf(groupName)+1;
-
-if(index>=select.length){
-	index=0
-}
-
-$surge.setSelectGroupPolicy("Netflix", select[index]);
-
-//测试当前选择
-
-await timeout(1000).catch(() => {})
-
-let { status, regionCode, policyName } = await testPolicy(select[index]);
-
-
-
-/**
-   * 面板显示
-   */
-
-let title = "Netflix ➟ " + select[index];
 
 let panel = {
-  title: `${title}`,
+  title: '🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自动切换',
 }
+let options = getOptions()
 
-  // 完整解锁
-  if (status==2) {
-    panel['content'] = `完整支援Netflix，区域：${regionCode}`
-    panel['icon'] = params.icon1
-	 panel['icon-color'] = params.color1
-  } else if (status==1) {
-      panel['content'] = `解锁自制内容`
-      panel['icon'] = params.icon2
-	   panel['icon-color'] = params.color2
-    }else {
- 		$surge.setSelectGroupPolicy("Netflix", first);
-  		panel['content'] = `您的节点连自制内容都不支持呢～`
-  		panel['icon'] = params.icon3
-	 	panel['icon-color'] = params.color3
-		return
-	}
+;(async () => {
+  let { policyGroup } = options
+  let allPolicyGroups = await httpAPI('/v1/policy_groups')
+  let policies = allPolicyGroups?.[policyGroup] ?? []
+  if (policies.length === 0) {
+    return
+  }
 
+  let fullUnlockPolicy = undefined
+  let onlyOriginalPolicy = undefined
+
+  /**
+   * 测试当前选择节点的解锁状态
+   */
+  let selectedPolicy = (await httpAPI('/v1/policy_groups/select', { group_name: encodeURIComponent(policyGroup) }))?.policy ?? ''
+  let { status, regionCode, policyName } = await testPolicy(selectedPolicy)
+
+  if (status === 2) {
+    fullUnlockPolicy = { regionCode, policyName }
+  } else if (status === 1) {
+    onlyOriginalPolicy = { regionCode, policyName }
+  }
+
+  if (status !== 2) {
+    for (let policy of policies) {
+      // 测过了，跳过测试
+      if (policy.name === selectedPolicy) {
+        continue
+      }
+
+      let success = await switchPolicy(policyGroup, policy.name)
+      if (success) {
+        // 切换成功后等待 1s
+        await timeout(1000).catch(() => {})
+        let { status, regionCode, policyName } = await testPolicy(policy.name)
+        // 找到第一个仅支持自制剧的节点
+        if (status === 1 && onlyOriginalPolicy == null) {
+          onlyOriginalPolicy = { regionCode, policyName }
+        } else if (status === 2) {
+          // 找到第一个完整解锁的节点后不在尝试切换节点
+          fullUnlockPolicy = { regionCode, policyName }
+          break
+        }
+      }
+    }
+  }
+
+  // 找到完整解锁的节点
+  if (fullUnlockPolicy) {
+    panel['content'] = `${fullUnlockPolicy.policyName} 完整解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎，解锁区域：${fullUnlockPolicy.regionCode}`
+    panel['style'] = 'good'
+    return
+  }
+
+  // 如果没有找到完整解锁的节点，则选择一个解释自制剧的节点
+  if (!fullUnlockPolicy && onlyOriginalPolicy) {
+    let success = await switchPolicy(policyGroup, onlyOriginalPolicy.policyName)
+    if (!success) {
+      panel['content'] = `没有完整解锁的策略，且切换至解锁自制剧的策略失败`
+      panel['style'] = 'error'
+      return
+    }
+
+    panel['content'] = `没有完整解锁的策略，切换至解锁自制剧的策略：${onlyOriginalPolicy.policyName}`
+    panel['style'] = 'info'
+    return
+  }
+
+  // 没有支持解锁的节点，则切换回原来的策略
+  await switchPolicy(policyGroup, selectedPolicy)
+  panel['content'] = `没有支持整解锁的策略`
+  panel['style'] = 'error'
+})()
+  .catch(error => {
+    console.log(error)
+  })
+  .finally(() => {
     $done(panel)
+  })
 
-
-})();
-
-
-
-
-
-function httpAPI(path = "", method = "GET", body = null) {
-    return new Promise((resolve) => {
-        $httpAPI(method, path, body, (result) => {
-            resolve(result);
-        });
-    });
-};
+function httpAPI(path, body, method = 'GET') {
+  return new Promise(resolve => {
+    $httpAPI(method, path, body, data => {
+      resolve(data)
+    })
+  })
+}
 
 async function testPolicy(policyName) {
   try {
@@ -190,6 +128,16 @@ async function testPolicy(policyName) {
     console.log(error)
     return { status: -1, policyName }
   }
+}
+
+async function switchPolicy(groupName, policyName) {
+  let data = await httpAPI('/v1/policy_groups/select', { group_name: groupName, policy: policyName }, 'POST')
+  if (data?.error) {
+    console.log(`${groupName} 切换策略：${policyName} 失败，error: ${data.error}`)
+    return false
+  }
+  console.log(`${groupName} 切换策略：${policyName} 成功`)
+  return true
 }
 
 /**
@@ -260,13 +208,4 @@ function getOptions() {
   }
 
   return options
-}
-
-function getParams(param) {
-  return Object.fromEntries(
-    $argument
-      .split("&")
-      .map((item) => item.split("="))
-      .map(([k, v]) => [k, decodeURIComponent(v)])
-  );
 }
