@@ -1,87 +1,40 @@
 /**
- * https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/test-version/networkCheck_test.js
- * Surge 網路詳情面板
- * @Nebulosa-Cat
- * 詳情請見 README
- */
-const { wifi, v4, v6 } = $network;
+* https://raw.githubusercontent.com/love499520/Surge-1/main/Panel/Network-Info/Network-Info_test.sgmodule
+* Surge 網路詳情面板
+* 本人 @Nebulosa-Cat僅翻譯為繁體中文自用
+* Net Info 面板模組原始作者 @author: Peng-YM
+* 並與另一位 聰聰大佬(@congcong) 大的節點資訊面板進行整合
+* 並且感謝Pysta大佬、野比大佬(@NobyDa)、皮樂大佬(@Hiraku)技術支援
+* 以及鴿子大佬(@zZPiglet)精簡化code
+*/
+const { wifi, v4 } = $network;
+const ip = v4.primaryAddress;
 
-let cellularInfo = '';
-const carrierNames = {
-  //台灣電信業者 MNC Code
-  '466-11': '中华电信', '466-92': '中华电信',
-  '466-01': '远传电信', '466-03': '远传电信',
-  '466-97': '台湾大哥大',
-  '466-89': '台湾之星',
-  '466-05': '亚太电信',
-  //中國電信業者 MNC Code
-  '460-03': '中国电信', '460-05': '中国电信', '460-11': '中国电信',
-  '460-01': '中国联通', '460-06': '中国联通', '460-09': '中国联通',
-  '460-00': '中国移动', '460-02': '中国移动', '460-04': '中国移动', '460-07': '中国移动', '460-08': '中国移动',
-  '460-15': '中国广',
-  '460-20': '中国铁通',
-};
-
-const radioGeneration = {
-  'GPRS': '2.5G',
-  'CDMA1x': '2.5G',
-  'EDGE': '2.75G',
-  'WCDMA': '3G',
-  'HSDPA': '3.5G',
-  'CDMAEVDORev0': '3.5G',
-  'CDMAEVDORevA': '3.5G',
-  'CDMAEVDORevB': '3.75G',
-  'HSUPA': '3.75G',
-  'eHRPD': '3.9G',
-  'LTE': '4G',
-  'NRNSA': '5G',
-  'NR': '5G',
-};
-
-if (!v4.primaryAddress && !v6.primaryAddress) {
-  $done({
-    title: '没有网络',
-    content: '网络未连接\n请检查网络',
-    icon: 'wifi.exclamationmark',
-    'icon-color': '#CB1B45',
-  });
-} else {
-  if ($network['cellular-data']) {
-    const carrierId = $network['cellular-data'].carrier;
-    const radio = $network['cellular-data'].radio;
-    if (carrierId && radio) {
-      cellularInfo = carrierNames[carrierId] ?
-        carrierNames[carrierId] + ' - ' + radioGeneration[radio] + ' (' + radio + ')' :
-        '蜂窝数据 - ' + radioGeneration[radio] + ' (' + radio + ')';
-    }
-  }
-  $httpClient.get('http://ip-api.com/json', function (error, response, data) {
-    if (error) {
-      $done({
-        title: '发生错误',
-        content: '无法连接到网络\n请检查网络状态',
-        icon: 'wifi.exclamationmark',
-        'icon-color': '#CB1B45',
-      });
-    }
-
-    const info = JSON.parse(data);
+// No network connection
+if (!ip) {
     $done({
-      title: wifi.ssid ? wifi.ssid : cellularInfo,
+      title: 'Network Info Panel',
+      content: '没有网络\n请检查网络',
+      icon: 'wifi.exclamationmark',
+      'icon-color': '#CB1B45',
+    });
+  }
+else{
+  $httpClient.get('http://ip-api.com/json', function (error, response, data) {
+    const jsonData = JSON.parse(data);
+    $done({
+      title: wifi.ssid ? wifi.ssid : '蜂窝数据',
       content:
-        (v4.primaryAddress ? `IPv4 : ${v4.primaryAddress} \n` : '') +
-        (v6.primaryAddress ? `IPv6 : ${v6.primaryAddress}\n` : '') +
-        (v4.primaryRouter && wifi.ssid ? `Router IPv4 : ${v4.primaryRouter}\n` : '') +
-        (v6.primaryRouter && wifi.ssid ? `Router IPv6 : ${v6.primaryRouter}\n` : '') +
-        `节点 IP : ${info.query}\n` +
-        `节点 ISP : ${info.isp}\n` +
-        `节点位置 : ${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city
-        }`,
+        `內部 IP：${ip} \n` +
+        (wifi.ssid ? `路由器地址：${v4.primaryRouter}\n` : '') +
+        `外部 IP：${jsonData.query}\n` +
+        `节点 ISP : ${jsonData.isp}\n` +
+        `节点位置 : ${getFlagEmoji(jsonData.countryCode)} ${jsonData.country} | ${jsonData.city}`,
       icon: wifi.ssid ? 'wifi' : 'simcard',
       'icon-color': wifi.ssid ? '#005CAF' : '#F9BF45',
     });
   });
-}
+};
 
 function getFlagEmoji(countryCode) {
   const codePoints = countryCode
