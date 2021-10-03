@@ -57,12 +57,12 @@ $configuration.sendMessage(message).then(resolve => {
       console.log(code)
       
       if (code === 'Not Available') {
-        result['content'] = '不支持解锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎'
+        result['content'] = '封锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎'
         //return
       } else if (code === "timeout") {
         result['content'] = "❌ 测试超时，请重试"
       } else {
-        result['content'] = '支持解锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 ➟ ⟦'+flags.get(code.toUpperCase())+" 地区⟧"
+        result['content'] = '解锁 📺 𝒀𝒐𝒖𝑻𝒖𝒃𝒆 𝑷𝒓𝒆𝒎𝒊𝒖𝒎 ➟ ⟦'+flags.get(code.toUpperCase())+" 地区⟧"
       }
       $notify(result["title"], output, result["content"], link)
       $done()
