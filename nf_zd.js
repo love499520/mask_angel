@@ -148,7 +148,7 @@ console.log("节点状态:"+status)
    * 面板显示
    */
 
-let title = "Netflix ➟ " + select[index];
+let title = "🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自动切换 ➟ " + select[index];
 
 let panel = {
   title: `${title}`,
