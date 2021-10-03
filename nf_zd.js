@@ -182,7 +182,7 @@ let panel = {
     panel['icon'] = params.icon1
 	 panel['icon-color'] = params.color1
   } else if (status==1) {
-      panel['content'] = `仅 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制剧`
+      panel['content'] = `仅 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 自制`
       panel['icon'] = params.icon2
 	   panel['icon-color'] = params.color2
     }else {
