@@ -1,6 +1,6 @@
 /**
  * https://raw.githubusercontent.com/Nebulosa-Cat/Surge/main/Panel/Network-Info/test-version/networkCheck_test.js
-  * Surge 網路詳情面板
+ * Surge 網路詳情面板
  * @Nebulosa-Cat
  * 詳情請見 README
  */
@@ -18,7 +18,7 @@ const carrierNames = {
   '460-03': '中国电信', '460-05': '中国电信', '460-11': '中国电信',
   '460-01': '中国联通', '460-06': '中国联通', '460-09': '中国联通',
   '460-00': '中国移动', '460-02': '中国移动', '460-04': '中国移动', '460-07': '中国移动', '460-08': '中国移动',
-  '460-15': '中国广电',
+  '460-15': '中国广',
   '460-20': '中国铁通',
 };
 
