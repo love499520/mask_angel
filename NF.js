@@ -1,9 +1,9 @@
 /* 脚本经本人测试已经可以正常运行，但仍可能存在bug，使用过程中遇到障碍请联系Telegram：https://t.me/okmytg
 脚本说明：
  1:https://raw.githubusercontent.com/fishingworld/something/main/NetflixSelect/NetflixSelect.sgmudule
- 2:本脚本与姊妹脚本nf_autocheck相互依赖，你应当优先执行一次panel脚本，且必须手动运行一次cron脚本以获取节点列表
+ 2:panel脚本依赖cron脚本传送数据，你应当手动运行一次cron脚本以获取节点列表
  3:为了节省效能，请尽量精简策略组
- 4:点击panel时切换至下一个可解锁节点
+ 4:点击panel时切换至下一个可解锁节点，节点列表为空时，仅执行状态检测
  5:panel脚本允许自动更新，自动更新将刷新策略组信息，并可以自动选择更优选项
  6:检测数据有一定概率会出错，且网飞数据会有所变动，因此你可能遇到切换至非全解锁节点，此时切换至下一个即可，毕竟这是概率较小的事件，大部分检测都是正确的，亦可手动执行一次cron脚本，节点列表将得到更新与修正
  6:可用的自定义参数：
@@ -59,7 +59,7 @@ if(fullUnlock.toString().length==0){
 fullUnlock.splice(fullUnlock.indexOf(fullUnlock[0]), 1)
 }
 if(onlyOriginal.toString().length==0){
-onlyOriginal.splice(onlyOriginal.indexOf(fullUnlock[0]), 1)
+onlyOriginal.splice(onlyOriginal.indexOf(onlyOriginal[0]), 1)
 }
 
 console.log(fullUnlock.length+" | "+ onlyOriginal.length)
@@ -101,6 +101,8 @@ console.log("目标节点:"+ select[index])
 
 $surge.setSelectGroupPolicy(netflixGroup, select[index]);
 
+await timeout(1000).catch(() => {})
+
 }
 
 
@@ -108,22 +110,52 @@ $surge.setSelectGroupPolicy(netflixGroup, select[index]);
    * 自动刷新
    */
 
+/* 检查选择列表 */
+console.log(select.length)
+if(select.length==0){
+	$notification.post("❌ 获取失败", "❌ 未能获取节点列表，请手动运行一次 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 策略组遍历", "")
+}
 //测试当前选择
 
 //当前节点
 groupName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
 console.log("当前节点:"+groupName)
 
-await timeout(1000).catch(() => {})
-
 let { status, regionCode, policyName } = await testPolicy(groupName);
+let newStatus=status
+let reg = regionCode
 
 console.log("节点状态:"+status)
 
-//当前节点解锁范围小于选择列表时，执行自动切换
-if(status!= 2 && fullUnlock.length>0){
-	$surge.setSelectGroupPolicy(netflixGroup, select[0]);
+//当前节点不可全解锁时，执行自动切换，若列表为空，仅执行测试
+if(status!= 2){
+	if(select.length>0){
+	//遍历选择列表，找到第一个更优节点
+		for (let i = 0; i < select.length; ++i) {
+		$surge.setSelectGroupPolicy(netflixGroup, select[i]);
+		await timeout(1000).catch(() => {})
+		groupName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
+		console.log("当前节点:"+groupName)
+		let { status, regionCode, policyName } = await testPolicy(groupName);
+		console.log("节点状态:"+status)
+		if(status>newStatus){
+			newStatus=status
+			reg = regionCode
+			break;
+			}
+		}
+	}else {
+	groupName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
+	console.log("当前节点:"+groupName)
+	let { status, regionCode, policyName } = await testPolicy(groupName);
+	console.log("节点状态:"+status)
+	newStatus=status
+	reg = regionCode
+	}
 }
+
+	status=newStatus
+	regionCode=reg
 
 //获取根节点名
 let rootName = (await httpAPI("/v1/policy_groups/select?group_name="+encodeURIComponent(netflixGroup)+"")).policy;
@@ -135,13 +167,13 @@ while(allGroup.includes(rootName)==true){
    * 面板显示
    */
 
-let title = "🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 ➟ " + rootName;
+let title = "🎬 𝑵𝒆𝒕𝒇𝒍𝒊 ➟ " + rootName;
 
 let panel = {
   title: `${title}`,
 }
 
-  // 完整解锁
+  
   if (status==2) {
     panel['content'] = `解锁 🎬 𝑵𝒆𝒕𝒇𝒍𝒊𝒙 𝑷𝒓𝒆𝒎𝒊𝒖𝒎，区域：${regionCode}`
     panel['icon'] = params.icon1
