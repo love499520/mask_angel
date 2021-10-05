@@ -57,7 +57,7 @@ let netType;
 if(net=="en0") {
 	netType = "𝑾𝑰𝑭𝑰"
 	}else if(net=="lo0") {
-	netType = "环回网络"
+	netType = "回环网络"
 	}else{
 	netType = "蜂窝数据"
 	}
