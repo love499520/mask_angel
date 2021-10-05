@@ -1,3 +1,7 @@
+/**
+ * https://raw.githubusercontent.com/fishingworld/something/main/PanelScripts/surgepro_flushdns.js
+ */
+
 let params = getParams($argument)
 
 !(async () => {
