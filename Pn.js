@@ -14,7 +14,7 @@ let startTime = timeTransform(dateNow,dateTime)
 if ($trigger == "button") await httpAPI("/v1/dns/flush");
 
   $done({
-      title:"👑 𝑺𝒖𝒓𝒈𝒆 𝑷𝒓𝒐",
+      title:"👑 𝑺𝒖𝒓𝒈𝒆 𝑷𝒓𝒐®",
       content:`启动时长: ${startTime}`,
 		icon: params.icon,
 		"icon-color":params.color
