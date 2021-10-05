@@ -1,3 +1,7 @@
+/**
+ * https://raw.githubusercontent.com/fishingworld/something/main/PanelScripts/surgepro_reloadprofile.js
+ */
+
 let params = getParams($argument)
 
 !(async () => {
