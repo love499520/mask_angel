@@ -55,11 +55,11 @@ let inCurrentSpeed = speedTransform(network.inCurrentSpeed) //下载速度
 /* 判断网络类型 */
 let netType;
 if(net=="en0") {
-	netType = "WiFi"
+	netType = "𝑾𝑰𝑭𝑰"
 	}else if(net=="lo0") {
-	netType = "Localhost"
+	netType = "环回网络"
 	}else{
-	netType = "Cellular"
+	netType = "蜂窝数据"
 	}
 	
 console.log(netType)
