@@ -177,7 +177,7 @@ while(allGroup.includes(rootName)==true){
 
 
 
-let title = "Disney+ ➟ " + rootName;
+let title = "📽️ 𝑫𝒊𝒔𝒏𝒆𝒚+ ➟ " + rootName;
 
 let panel = {
   title: `${title}`,
