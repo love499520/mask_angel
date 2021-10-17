@@ -1,0 +1,58 @@
+# 各大代理软件自用DNS DoH 配置
+
+# Surge
+# DNS
+dns-server = 8.8.8.8, 1.1.1.1, 119.29.29.29, 223.5.5.5, 2001:4860:4860::8888, 2606:4700:4700::1111, 2402:4e00::, 2400:3200::1
+# DoH
+doh-server = https://dns.google/dns-query, https://cloudflare-dns.com/dns-query, https://doh.pub/dns-query, https://dns.alidns.com/dns-query
+
+# Quantumult X
+[dns]
+; 禁用系统 DNS 以及 ipv6
+no-system
+;no-ipv6
+server=8.8.8.8
+server=1.1.1.1
+server=119.29.29.29
+server=223.5.5.5
+# server=2001:4860:4860::8888
+# server=2606:4700:4700::1111
+# server=2402:4e00::
+# server=2400:3200::1
+doh-server=https://dns.google/dns-query
+doh-server=https://cloudflare-dns.com/dns-query
+doh-server=https://doh.pub/dns-query
+doh-server=https://dns.alidns.com/dns-query
+
+# Clash
+ dns:
+      enable: true
+      ipv6: true
+
+      nameserver:
+        - 8.8.8.8
+        - 1.1.1.1
+        - 119.29.29.29
+        - 223.5.5.5
+        - 2001:4860:4860::8888
+        - 2606:4700:4700::1111
+        - 2402:4e00::
+        - 2400:3200::1
+        - https://dns.google/dns-query
+        - https://cloudflare-dns.com/dns-query
+        - https://doh.pub/dns-query
+        - https://dns.alidns.com/dns-query
+
+# Adguard
+8.8.8.8
+1.1.1.1
+119.29.29.29
+223.5.5.5
+2001:4860:4860::8888
+2606:4700:4700::1111
+2402:4e00::
+2400:3200::1
+https://dns.google/dns-query
+https://cloudflare-dns.com/dns-query
+https://doh.pub/dns-query
+https://dns.alidns.com/dns-query
