@@ -1,0 +1,67 @@
+#---------------------------------------------------#
+# 配置文件需要放置在 $HOME/.config/clash/config.yml
+# 或者运行目录下的config.yml
+#---------------------------------------------------#
+# HTTP(S) and SOCKS5 server on the same port
+mixed-port: 7890
+
+# Port of HTTP(S) proxy server on the local end
+# port: 7890
+
+# Port of SOCKS5 proxy server on the local end
+socks-port: 7891
+
+# Transparent proxy server port for Linux and macOS (Redirect TCP and TProxy UDP)
+redir-port: 7892
+
+# Transparent proxy server port for Linux (TProxy TCP and TProxy UDP)
+tproxy-port: 7893
+
+# 实验性功能
+experimental:
+  ignore-resolve-fail: true # 忽略 DNS 解析失败，默认值为 true
+  # interface-name: en0 # outbound interface name
+
+# authentication of local SOCKS5/HTTP(S) server
+authentication:
+ - "Mask:123456789"
+
+# Set to true to allow connections to the local-end server from
+# other LAN IP addresses
+allow-lan: true
+
+# Clash router working mode
+# rule: rule-based packet routing
+# global: all packets will be forwarded to a single endpoint
+# direct: directly forward the packets to the Internet
+mode: rule
+
+# Clash by default prints logs to STDOUT
+# info / warning / error / debug / silent
+log-level: info
+
+ipv6: true
+
+# RESTful web API listening address
+external-controller: 127.0.0.1:9090
+
+# Clash DNS配置
+dns:
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:5450
+  enhanced-mode: redir-host
+  nameserver:
+     - 119.29.29.29
+     - 223.5.5.5
+     #- [2402:4e00::]
+     #- [2400:3200::1]
+     - https://doh.pub/dns-query
+     - https://dns.alidns.com/dns-query
+  fallback:
+     - 8.8.8.8
+     - 1.1.1.1
+     #- [2001:4860:4860::8888]
+     #- [2606:4700:4700::1111]
+     - https://dns.google/dns-query
+     - https://cloudflare-dns.com/dns-query
