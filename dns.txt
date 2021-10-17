@@ -62,3 +62,4 @@ https://dns.google/dns-query
 https://cloudflare-dns.com/dns-query
 https://doh.pub/dns-query
 https://dns.alidns.com/dns-query
+127.0.0.1:5450
