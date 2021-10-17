@@ -25,6 +25,9 @@ doh-server=https://cloudflare-dns.com/dns-query
 doh-server=https://doh.pub/dns-query
 doh-server=https://dns.alidns.com/dns-query
 
+# Loon
+dns-server = system,8.8.8.8,1.1.1.1,119.29.29.29,223.5.5.5,2001:4860:4860::8888,2606:4700:4700::1111,2402:4e00::,2400:3200::1
+
 # Clash
  dns:
       enable: true
