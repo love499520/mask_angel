@@ -1,4 +1,5 @@
 # 各大代理软件自用DNS DoH 配置
+# https://raw.githubusercontent.com/love499520/mask_angel/master/dns.txt
 
 # Surge
 # DNS
