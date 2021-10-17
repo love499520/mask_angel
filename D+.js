@@ -188,7 +188,7 @@ let panel = {
     panel['icon'] = params.icon1
 	 panel['icon-color'] = params.color1
   } else if (status==2) {
-      panel['content'] = `❌ 即将登陆，区域：${region}`
+      panel['content'] = `❌ 即将登陆，敬请期待，区域：${region}`
       panel['icon'] = params.icon2
 	   panel['icon-color'] = params.color2
     }else {
@@ -215,10 +215,10 @@ async function testDisneyPlus() {
       return { region, status: STATUS_COMING }
     }
 
-    let { refresh_token } = await Promise.race([getToken(), timeout(1000)])
-    let { countryCode, inSupportedLocation } = await Promise.race([getLocationInfo(refresh_token), timeout(1000)])
+	 let { countryCode, inSupportedLocation } = await Promise.race([getLocationInfo(), timeout(1000)])
 
-    region = countryCode
+
+    region = countryCode?? region
     // 即将登陆
     if (inSupportedLocation === false || inSupportedLocation === 'false') {
       return { region, status: STATUS_COMING }
@@ -243,49 +243,35 @@ async function testDisneyPlus() {
   }
 }
 
-function getToken() {
-  return new Promise((resolve, reject) => {
-    let opts = {
-      url: 'https://global.edge.bamgrid.com/token',
-      headers: {
-        'Accept-Language': 'en',
-        Authorization: AUTHORIZATION,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': UA,
-      },
-      body: 'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange&latitude=0&longitude=0&platform=browser&subject_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhMmM3MmZiNS1kOGI1LTQ0ZDItYjJmNi0zMWRkMWFiN2Y1N2QiLCJhdWQiOiJ1cm46YmFtdGVjaDpzZXJ2aWNlOnRva2VuIiwibmJmIjoxNjMzMzU4MzE1LCJpc3MiOiJ1cm46YmFtdGVjaDpzZXJ2aWNlOmRldmljZSIsImV4cCI6MjQ5NzM1ODMxNSwiaWF0IjoxNjMzMzU4MzE1LCJqdGkiOiJkYmNiZjUzYS1lZDEwLTRjOGItYjU2My01ZDJkNTc1ZDFlMDEifQ.xGII2Ud7xHWELrpW_OSnunFGlfJ6EFWQ2PzSYJGsMLY13u5iUR6QKCcBkUaEPMcHaVTTwQypc9hP9q7-52kgHQ&subject_token_type=urn%3Abamtech%3Aparams%3Aoauth%3Atoken-type%3Adevice',
-    }
 
-    $httpClient.post(opts, function (error, response, data) {
-      if (error) {
-        reject('Error')
-        return
-      }
-      if (response.status !== 200) {
-        reject('Not Available')
-        return
-      }
 
-      resolve(JSON.parse(data))
-    })
-  })
-}
-
-function getLocationInfo(refreshToken) {
+function getLocationInfo() {
   return new Promise((resolve, reject) => {
     let opts = {
       url: 'https://disney.api.edge.bamgrid.com/graph/v1/device/graphql',
       headers: {
         'Accept-Language': 'en',
-        Authorization: AUTHORIZATION,
+        Authorization: 'ZGlzbmV5JmJyb3dzZXImMS4wLjA.Cu56AgSfBTDag5NiRA81oLHkDZfu5L3CKadnefEAY84',
         'Content-Type': 'application/json',
         'User-Agent': UA,
       },
       body: JSON.stringify({
-        query: 'mutation refreshToken($input: RefreshTokenInput!) { refreshToken(refreshToken: $input) { activeSession { sessionId } } }',
+        query: 'mutation registerDevice($input: RegisterDeviceInput!) { registerDevice(registerDevice: $input) { grant { grantType assertion } } }',
         variables: {
           input: {
-            refreshToken,
+            applicationRuntime: 'chrome',
+            attributes: {
+              browserName: 'chrome',
+              browserVersion: '94.0.4606',
+              manufacturer: 'microsoft',
+              model: null,
+              operatingSystem: 'windows',
+              operatingSystemVersion: '10.0',
+              osDeviceIds: [],
+            },
+            deviceFamily: 'browser',
+            deviceLanguage: 'en',
+            deviceProfile: 'windows',
           },
         },
       }),
