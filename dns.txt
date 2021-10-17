@@ -33,7 +33,8 @@ doh-server = https://dns.google/dns-query,https://cloudflare-dns.com/dns-query,h
  dns:
       enable: true
       ipv6: true
-
+      listen: 127.0.0.1:5450
+      enhanced-mode: redir-host
       nameserver:
         - 8.8.8.8
         - 1.1.1.1
