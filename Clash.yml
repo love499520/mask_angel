@@ -23,8 +23,8 @@ experimental:
   # interface-name: en0 # outbound interface name
 
 # authentication of local SOCKS5/HTTP(S) server
-authentication:
- - "Mask:123456789"
+# authentication:
+#  - "Mask:123456789"
 
 # Set to true to allow connections to the local-end server from
 # other LAN IP addresses
