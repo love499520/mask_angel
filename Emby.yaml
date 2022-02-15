@@ -1,0 +1,30 @@
+# 自建流媒体
+# DOMAIN-SUFFIX：域名后缀匹配
+# DOMAIN：域名匹配
+# DOMAIN-KEYWORD：域名关键字匹配
+# IP-CIDR：IP段匹配
+# SRC-IP-CIDR：源IP段匹配
+# GEOIP：GEOIP数据库（国家代码）匹配
+# DST-PORT：目标端口匹配
+# SRC-PORT：源端口匹配
+# MATCH：全匹配（一般放在最后）
+DOMAIN-KEYWORD,Infuse
+DOMAIN-KEYWORD,emby
+DOMAIN-KEYWORD,Plex
+DOMAIN,emby.dear.ooo
+DOMAIN,club.dear.ooo
+DOMAIN,video.dear.ooo
+DOMAIN-SUFFIX,embyclub.com
+DOMAIN-SUFFIX,pornemby.club
+DOMAIN-SUFFIX,youremby.gq
+DOMAIN-SUFFIX,jmsooo.com
+DOMAIN-SUFFIX,otakudrive.life
+DOMAIN-SUFFIX,neko.edu.rs
+DOMAIN-SUFFIX,otakudrive.life
+DOMAIN-SUFFIX,ok.edu.hk
+IP-CIDR,103.135.248.145/32
+IP-CIDR,172.67.136.175/32
+IP-CIDR,104.27.149.10/32
+IP-CIDR,144.91.125.216/32
+IP-CIDR,18.140.50.188/32
+IP-CIDR,42.3.30.58/32
