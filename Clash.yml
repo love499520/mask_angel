@@ -54,8 +54,8 @@ dns:
   nameserver:
      - 119.29.29.29
      - 223.5.5.5
-     - "2402:4e00:": ~
-     - 2400:3200::1
+     # - 2402:4e00::
+     # - 2400:3200::1
      - https://doh.pub/dns-query
      - https://dns.alidns.com/dns-query
   fallback:
